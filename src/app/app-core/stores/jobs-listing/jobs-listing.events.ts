@@ -8,5 +8,6 @@ export const JobsListingEvents = eventGroup({
   events: {
     load: type<void>(),
     loaded: type<PHPResourceResponse<JobsListing>>(),
+    filter: type<string>(),
   },
 });

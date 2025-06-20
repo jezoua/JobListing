@@ -1,1 +1,6 @@
-<p>nav-bar works!</p>
+<div class="w-screen h-10 bg-white flex flex-row p-2 gap-4 px-20">
+  <img src="logo_red.png" alt="Jobs Global Logo" />
+  <form [formGroup]="formGroup">
+    <input class="bg-jg-background rounded-md px-2 placeholder-gray-200   font-light font-roboto" placeholder="Search" formControlName="filter" type="search" />
+  </form>
+</div>

@@ -9,7 +9,7 @@ import { withJobsListingMethods } from './jobs-listing.methods';
 export type JobsListingState = {
   data: PHPResourceResponse<JobsListing> | undefined;
   numberOfItemsToDisplay: number;
-  filters: { jobTitle: string; location: string };
+  filters: string;
   isLoading: boolean;
 };
 
@@ -18,7 +18,7 @@ export const INCREMENT = 10
 const initialState: JobsListingState = {
   data: undefined,
   numberOfItemsToDisplay: INCREMENT,
-  filters: { jobTitle: '', location: '' },
+  filters: '',
   isLoading: false,
 };
 

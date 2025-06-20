@@ -8,14 +8,15 @@ export function withJobsListingReducer<_>() {
     type<{ state: JobsListingState }>(),
     withReducer(
       on(JobsListingEvents.loaded, (event) => {
-        console.log('🔴',event.payload )
+        console.log('🔴', event.payload);
         return { data: event.payload, isLoading: false };
       }),
-      on(JobsListingEvents.load, (event) =>  {
-        return {isLoading: true};
-      })
-
-      //on(JobsListingEvents.search, ({ payload: filter }) => ({ filter })),
+      on(JobsListingEvents.load, (event) => {
+        return { isLoading: true };
+      }),
+      on(JobsListingEvents.filter, ({payload:filter}) => {
+        return { filters: filter };
+      }),
       //on(JobsListingEvents.addFavourite, ({ payload: favouriteId }) => (state) => {
       //  if (state.favouriteIds.includes(favouriteId)) {
       //    return {};
