@@ -1,1 +1,28 @@
 /* You can add global styles to this file, and also import other style files */
+@import "tailwindcss";
+
+@theme {
+  --color-jg-red: #7F110F;
+  --color-jg-background: #faf7f4;
+  --color-jg-orange: #db9700;
+
+  --font-rubik: "rubik";
+  --font-roboto: "roboto";
+}
+
+@font-face {
+  font-family: "rubik";
+  src: url("fonts/Rubik-VariableFont_wght.ttf");
+}
+
+@font-face {
+  font-family: "roboto";
+  src: url("fonts/Roboto-VariableFont_wdth_wght.ttf");
+}
+
+html,
+body {
+  height: 100%;
+  background-color: #faf7f4;
+  font-family: "rubik";
+}

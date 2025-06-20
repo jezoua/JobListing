@@ -1,0 +1,18 @@
+<div class="flex flex-row gap-1 font-roboto">
+  <button [disabled]="active_page()===1" (click)="prevPage()"
+    [ngClass]="{'text-red-200':active_page()===1}"
+    class="border-jg-red w-6 h-6 rounded-full flex items-center justify-center text-jg-red cursor-pointer">
+    &lt;
+  </button>
+  @for(page of pages(); track $index){
+  <button (click)="setActivePage(page)"  [ngClass]="{'bg-jg-red text-white shadow-md': active_page()===page}"
+    class="w-6 h-6 rounded-full flex items-center justify-center text-jg-red cursor-pointer">
+    {{page}}
+  </button>
+  }
+  <button [disabled]="active_page()===number_of_pages()" (click)="nextPage()"
+    [ngClass]="{'text-red-200':active_page()===number_of_pages()}"
+    class="border-jg-red w-6 h-6 rounded-full flex items-center justify-center text-jg-red cursor-pointer">
+    &gt;
+  </button>
+</div>
