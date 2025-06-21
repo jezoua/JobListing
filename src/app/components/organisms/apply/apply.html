@@ -1,0 +1,123 @@
+<div class="fixed inset-0 z-50 bg-black bg-opacity-40 flex items-center justify-center">
+  <div class="h-9/10 bg-white flex flex-col gap-4 rounded-lg shadow-lg p-6 w-full max-w-xl relative">
+    <button (click)="close()" class="absolute top-2 right-4 text-jg-red cursor-pointer hover:text-black text-xl">
+      ×
+    </button>
+    <div class="flex flex-col">
+      <h2 class="text-2xl font-roboto text-jg-red">
+        Apply as {{active_job()?.title}}
+      </h2>
+      <span class="text-cyan-400 font-light">{{active_job()?.page?.alias}}</span>
+    </div>
+
+    <form [formGroup]="form" (ngSubmit)="submit()" class="space-y-4 overflow-y-scroll h-full">
+      <div class="flex flex-col gap-2">
+        <div class="relative w-full">
+          <input formControlName="name" placeholder="" [ngClass]="{'border-red-500': hasError('name', 'required')}"
+            class="peer block w-full appearance-none border border-gray-300 bg-white px-3 pt-5 text-md text-gray-900 rounded-md focus:border-jg-orange focus:outline-none" />
+          <label for="name"
+            class="absolute left-3 top-2 text-gray-500 text-xs transition-all duration-200 peer-placeholder-shown:top-3 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-focus:top-1 peer-focus:text-xs peer-focus:text-jg-orange">
+            Name
+          </label>
+          @if(hasError('name', 'required')){
+          <span class="px-3 text-sm text-red-500">Name is required.</span>
+          }
+        </div>
+        <div class="relative w-full">
+          <input formControlName="email" type="email" placeholder=""
+            [ngClass]="{'border-red-500': hasError('email', 'email') || hasError('email', 'required')}"
+            class="peer block w-full appearance-none border border-gray-300 bg-white px-3 pt-5 text-md text-gray-900 rounded-md focus:border-jg-orange focus:outline-none" />
+          <label for="email"
+            class="absolute left-3 top-2 text-gray-500 text-xs transition-all duration-200 peer-placeholder-shown:top-3 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-focus:top-1 peer-focus:text-xs peer-focus:text-jg-orange">
+            Email
+          </label>
+          @if(hasError('email', 'email') || hasError('email', 'required')){
+          <span class="px-3 text-sm text-red-500">Invalid email.</span>
+          } @if(hasError('email', 'required')){
+          <span class="text-sm text-red-500">Email is required.</span>
+          }
+        </div>
+        <div class="relative w-full">
+          <input formControlName="phone" type="text" placeholder=""
+            [ngClass]="{'border-red-500': hasError('phone', 'required')}"
+            class="peer block w-full appearance-none border border-gray-300 bg-white px-3 pt-5 text-md text-gray-900 rounded-md focus:border-jg-orange focus:outline-none" />
+          <label for="phone"
+            class="absolute left-3 top-2 text-gray-500 text-xs transition-all duration-200 peer-placeholder-shown:top-3 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-focus:top-1 peer-focus:text-xs peer-focus:text-jg-orange">
+            Phone
+          </label>
+          @if(hasError('phone', 'required')){
+          <span class="px-3 text-sm text-red-500">Phone is required.</span>
+          }
+        </div>
+        <div class="relative w-full">
+          <input formControlName="country" type="text" placeholder=""
+            [ngClass]="{'border-red-500': hasError('country', 'required')}"
+            class="peer block w-full appearance-none border border-gray-300 bg-white px-3 pt-5 text-md text-gray-900 rounded-md focus:border-jg-orange focus:outline-none" />
+          <label for="country"
+            class="absolute left-3 top-2 text-gray-500 text-xs transition-all duration-200 peer-placeholder-shown:top-3 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-focus:top-1 peer-focus:text-xs peer-focus:text-jg-orange">
+            Country
+          </label>
+          @if(hasError('country', 'required')){
+          <span class="px-3 text-sm text-red-500">Country is required.</span>
+          }
+        </div>
+        <div class="relative w-full">
+          <input formControlName="education" type="text" placeholder=""
+            [ngClass]="{'border-red-500': hasError('education', 'required')}"
+            class="peer block w-full appearance-none border border-gray-300 bg-white px-3 pt-5 text-md text-gray-900 rounded-md focus:border-jg-orange focus:outline-none" />
+          <label for="education"
+            class="absolute left-3 top-2 text-gray-500 text-xs transition-all duration-200 peer-placeholder-shown:top-3 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-focus:top-1 peer-focus:text-xs peer-focus:text-jg-orange">
+            Highest Education
+          </label>
+          @if(hasError('education', 'required')){
+          <span class="px-3 text-sm text-red-500">Education is required.</span>
+          }
+        </div>
+        <div class="relative w-full">
+          <input formControlName="currentPosition" type="text" placeholder=""
+            [ngClass]="{'border-red-500': hasError('currentPosition', 'required')}"
+            class="peer block w-full appearance-none border border-gray-300 bg-white px-3 pt-5 text-md text-gray-900 rounded-md focus:border-jg-orange focus:outline-none" />
+          <label for="position"
+            class="absolute left-3 top-2 text-gray-500 text-xs transition-all duration-200 peer-placeholder-shown:top-3 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-focus:top-1 peer-focus:text-xs peer-focus:text-jg-orange">
+            Current Position
+          </label>
+          @if(hasError('currentPosition', 'required')){
+          <span class="px-3 text-sm text-red-500">Position is required.</span>
+          }
+        </div>
+        <div class="relative w-full">
+          <input formControlName="company" type="text" placeholder=""
+            [ngClass]="{'border-red-500': hasError('company', 'required')}"
+            class="peer block w-full appearance-none border border-gray-300 bg-white px-3 pt-5 text-md text-gray-900 rounded-md focus:border-jg-orange focus:outline-none" />
+          <label for="company"
+            class="absolute left-3 top-2 text-gray-500 text-xs transition-all duration-200 peer-placeholder-shown:top-3 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-focus:top-1 peer-focus:text-xs peer-focus:text-jg-orange">
+            Company
+          </label>
+          @if(hasError('company', 'required')){
+          <span class="px-3 text-sm text-red-500">Company is required.</span>
+          }
+        </div>
+      </div>
+
+      <div>
+        <label class="block font-roboto">CV (max 3MB)</label>
+        <input type="file" (change)="onFileChange($event)" class="block mt-1 text-sm" />
+      </div>
+
+      <div class="">
+
+      <textarea formControlName="coverLetter" rows="4" placeholder="Cover Letter"
+            [ngClass]="{'border-red-500': hasError('coverLetter', 'required')}"
+        class="border border-gray-300 rounded-md form-textarea w-full p-2 placeholder-gray-300"></textarea>
+          @if(hasError('coverLetter', 'required')){
+          <span class="px-3 text-sm text-red-500">Cover letter is required.</span>
+          }
+      </div>
+
+      <button type="submit"
+        class="bg-white cursor-pointer hover:bg-jg-orange hover:text-white border border-jg-orange text-jg-orange py-2 px-4 rounded-md disabled:opacity-50">
+        Submit Application
+      </button>
+    </form>
+  </div>
+</div>

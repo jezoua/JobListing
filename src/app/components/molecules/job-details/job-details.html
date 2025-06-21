@@ -9,13 +9,13 @@
           <span class="material-icons text-jg-red">favorite</span>
         </button>
         } @else {
-        <button (click)="addFavourite(active_job()?.id)" class="flex items-center justify-center transition-all duration-200 hover:scale-110 cursor-pointer"
+        <button (click)="addFavourite(active_job()?.id)" class="flex  items-center justify-center transition-all duration-200 hover:scale-110 cursor-pointer"
           aria-label="Add to favorites">
           <span class="material-icons text-jg-red w-6">favorite_outlined</span>
         </button>
         }
 
-        <button class="bg-jg-red text-white rounded-full px-4 py-1 shadow-lg cursor-pointer">
+        <button (click)="apply()" class="active:scale-95 bg-jg-red text-white rounded-full px-4 py-1 shadow-lg cursor-pointer">
           Apply
         </button>
       </div>
