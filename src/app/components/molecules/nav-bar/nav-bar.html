@@ -1,6 +1,14 @@
-<div class="w-screen h-10 bg-white flex flex-row py-2 gap-4 px-20">
-  <img src="logo_red.png" alt="Jobs Global Logo" />
-  <form [formGroup]="formGroup">
-    <input class="bg-jg-background rounded-md px-2 placeholder-gray-200   font-light font-roboto" placeholder="Search" formControlName="filter" type="search" />
-  </form>
+<div class="w-screen h-10 bg-white justify-between flex flex-row py-2 gap-4 px-20">
+  <div class="flex flex-row gap-4">
+    <img src="logo_red.png" alt="Jobs Global Logo" />
+    <form [formGroup]="formGroup">
+      <input class="bg-jg-background rounded-md px-2 placeholder-gray-200 font-light font-roboto" placeholder="Search"
+        formControlName="filter" type="search" />
+    </form>
+  </div>
+  <div class="flex flex-row gap-2">
+    <button type="button" class="hover:shadow-lg cursor-pointer text-sm text-jg-red border border-jg-red rounded-md px-2">Log in</button>
+    <button type="button" class="hover:shadow-lg cursor-pointer bg-jg-red text-white px-2 rounded-md text-sm">Sign up</button>
+
+  </div>
 </div>

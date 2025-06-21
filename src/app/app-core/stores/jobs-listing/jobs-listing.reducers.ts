@@ -21,38 +21,6 @@ export function withJobsListingReducer<_>() {
       on(JobsListingEvents.setActiveJob, ({ payload: job }) => {
         return { active_job: job };
       }),
-      on(
-        JobsListingEvents.addFavourite,
-        ({ payload: favouriteId }) =>
-          (state) => {
-            console.log('ADDING to favourites...')
-            if (!favouriteId) return {};
-            if (state.favouriteIds.includes(favouriteId)) {
-              return {};
-            }
-            return {
-              favouriteIds: [...state.favouriteIds, favouriteId],
-            };
-          },
-      ),
-      on(
-        JobsListingEvents.removeFavourite,
-        ({ payload: favouriteId }) =>
-          (state) => {
-            if (!favouriteId) return {};
-            if (!state.favouriteIds.includes(favouriteId)) {
-              return {};
-            }
-            return {
-              favouriteIds: state.favouriteIds.filter(
-                (id) => favouriteId !== id,
-              ),
-            };
-          },
-      ),
-      //on(JobsListingEvents.resetFavourites, customerChanged, () => ({
-      //  favouriteIds: [],
-      //})),
     ),
   );
 }

@@ -1,5 +1,5 @@
 import { Component, effect, inject } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder,  ReactiveFormsModule } from '@angular/forms';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { debounceTime } from 'rxjs';
 import { JobsListingEvents } from '../../../app-core/stores/jobs-listing/jobs-listing.events';

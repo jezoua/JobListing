@@ -4,18 +4,21 @@
       <h3 class="text-3xl">{{active_job()?.title}}</h3>
       <div class="flex flex-row items-center justify-center gap-2">
         @if(active_job() && favourites().includes(active_job()!.id)) {
-        <button (click)="removeFavourite(active_job()?.id)" class="flex items-center justify-center transition-all duration-200 hover:scale-110 cursor-pointer"
+        <button (click)="removeFavourite(active_job()?.id)"
+          class="flex items-center justify-center transition-all duration-200 hover:scale-110 cursor-pointer"
           aria-label="remove from favorites">
           <span class="material-icons text-jg-red">favorite</span>
         </button>
         } @else {
-        <button (click)="addFavourite(active_job()?.id)" class="flex  items-center justify-center transition-all duration-200 hover:scale-110 cursor-pointer"
+        <button (click)="addFavourite(active_job()?.id)"
+          class="flex items-center justify-center transition-all duration-200 hover:scale-110 cursor-pointer"
           aria-label="Add to favorites">
           <span class="material-icons text-jg-red w-6">favorite_outlined</span>
         </button>
         }
 
-        <button (click)="apply()" class="active:scale-95 bg-jg-red text-white rounded-full px-4 py-1 shadow-lg cursor-pointer">
+        <button [disabled]="applied_jobs().includes(active_job()!.id)" (click)="apply()"
+          class="active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed bg-jg-red text-white rounded-full px-4 py-1 shadow-lg cursor-pointer">
           Apply
         </button>
       </div>

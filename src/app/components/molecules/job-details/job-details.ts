@@ -5,6 +5,8 @@ import { NgOptimizedImage } from '@angular/common';
 import { JobsListingEvents } from '../../../app-core/stores/jobs-listing/jobs-listing.events';
 import { injectDispatch } from '@ngrx/signals/events';
 import { ApplyModalService } from '../../../app-core/services/applyModal.service';
+import { UserStore } from '../../../app-core/stores/user/user.store';
+import { UserEvents } from '../../../app-core/stores/user/user.events';
 
 @Component({
   selector: 'app-job-details',
@@ -14,20 +16,31 @@ import { ApplyModalService } from '../../../app-core/services/applyModal.service
 })
 export class JobDetails {
   #jobsListingStore = inject(JobsListingStore);
-  #events = injectDispatch(JobsListingEvents);
+
+  //for accessing applied_jobs
+  #userStore = inject(UserStore);
+  public readonly applied_jobs = this.#userStore.applied_jobs;
+
+  //to access user events
+  #userEvents = injectDispatch(UserEvents)
+
+
+  //to access job listing events
+  #listingEvents = injectDispatch(JobsListingEvents);
+
   private readonly applyModalService = inject(ApplyModalService);
 
   //to get active job details
   public readonly active_job = this.#jobsListingStore.active_job;
 
   //to get list of favourites.id
-  public readonly favourites = this.#jobsListingStore.favourites;
+  public readonly favourites = this.#userStore.favouriteIds;
 
   addFavourite(job_id: string | undefined) {
-    this.#events.addFavourite(job_id);
+    this.#userEvents.addFavourite(job_id);
   }
   removeFavourite(job_id: string | undefined) {
-    this.#events.removeFavourite(job_id);
+    this.#userEvents.removeFavourite(job_id);
   }
 
   apply() {
