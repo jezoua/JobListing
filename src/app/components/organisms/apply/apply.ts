@@ -69,7 +69,7 @@ export class Apply {
         this.#events.applyToJob(this.active_job()!.id);
       }
       this.close();
-      this.snackBar.open('Application submitted!', 'Dismiss');
+      this.snackBar.open('✅  Application submitted!', '',{duration: 3000});
     } else {
       this.form.markAllAsTouched();
     }
