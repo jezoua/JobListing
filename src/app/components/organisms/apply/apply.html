@@ -1,4 +1,4 @@
-<div class="fixed inset-0 z-50 bg-black bg-opacity-40 flex items-center justify-center">
+<div class="fixed inset-0 z-50 bg-black/20 backdrop-blur-sm  flex items-center justify-center">
   <div class="h-9/10 bg-white flex flex-col gap-4 rounded-lg shadow-lg p-6 w-full max-w-xl relative">
     <button (click)="close()" class="absolute top-2 right-4 text-jg-red cursor-pointer hover:text-black text-xl">
       ×
@@ -115,6 +115,7 @@
       </div>
 
       <button type="submit"
+        [ngClass]="{'border-red-500 text-red-500 cursor-not-allowed': !form.valid}"
         class="bg-white cursor-pointer hover:bg-jg-orange hover:text-white border border-jg-orange text-jg-orange py-2 px-4 rounded-md disabled:opacity-50">
         Submit Application
       </button>

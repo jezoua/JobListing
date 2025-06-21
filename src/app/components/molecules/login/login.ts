@@ -1,51 +1,61 @@
 import { Component, inject, signal } from '@angular/core';
-import { SignUpModalService } from '../../../app-core/services/signUpModal.service';
+import { LogInModalService } from '../../../app-core/services/logInModal.service';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { UserEvents } from '../../../app-core/stores/user/user.events';
 import { injectDispatch } from '@ngrx/signals/events';
 import { Credential } from '../../../app-core/models/credential.model';
+import { UserStore } from '../../../app-core/stores/user/user.store';
 
 @Component({
-  selector: 'app-signup',
+  selector: 'app-login',
   imports: [CommonModule, ReactiveFormsModule],
-  templateUrl: './signup.html',
-  styleUrl: './signup.css',
+  templateUrl: './login.html',
+  styleUrl: './login.css',
 })
-export class Signup {
+export class LogIn {
   //to access user events
   #userEvents = injectDispatch(UserEvents)
+  #userStore = inject(UserStore)
 
-  //to hide and show signup modal
-  public readonly signUpModalService = inject(SignUpModalService);
+
+
+  //to hide and show logIn modal
+  public readonly logInModalService = inject(LogInModalService);
 
   private formBuilder = inject(FormBuilder);
 
-  public passwordMatch = signal<boolean>(true);
+  //to display error when wrong credential
+
+  public wrong_creds = signal<boolean>(false)
 
   form = this.formBuilder.group({
     username: ['', Validators.required],
     password: ['', Validators.required],
-    confirm_password: ['', Validators.required],
   });
 
-  closeSignUp() {
-    this.signUpModalService.close();
+  closeLogIn() {
+    this.logInModalService.close();
   }
+
   submit() {
     const formValue = this.form.value;
-    const password_matches = formValue.password === formValue.confirm_password;
 
-    //to display error if there is
-    this.passwordMatch.set(password_matches);
-    if (!!formValue && password_matches && this.form.valid) {
-      this.#userEvents.signUp({
-        username: formValue.username,
-        password: formValue.password,
-      } as Credential);
-      this.closeSignUp()
+    if (!!formValue  && this.form.valid) {
+      if(this.#userStore.username() === formValue.username && this.#userStore.password() === formValue.password){
+
+      this.#userEvents.logIn()
+
+      this.closeLogIn()
+      }
+      else{
+
+        this.wrong_creds.set(true)
+      }
+
     }
   }
+
   hasError(controlName: string, error: string): boolean {
     const control = this.form.get(controlName);
     return !!control?.touched && control?.hasError(error);

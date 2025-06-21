@@ -20,6 +20,7 @@ export class JobDetails {
   //for accessing applied_jobs
   #userStore = inject(UserStore);
   public readonly applied_jobs = this.#userStore.applied_jobs;
+  public readonly is_logged_in = this.#userStore.isLoggedIn;
 
   //to access user events
   #userEvents = injectDispatch(UserEvents)

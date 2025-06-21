@@ -10,7 +10,5 @@ export const JobsListingEvents = eventGroup({
     loaded: type<PHPResourceResponse<JobsListing>>(),
     filter: type<string>(),
     setActiveJob:type<JobsListing | undefined>(),
-    addFavourite:type<string | undefined>(),
-    removeFavourite:type<string | undefined>(),
   },
 });

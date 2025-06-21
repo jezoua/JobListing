@@ -62,6 +62,7 @@ export class Apply {
   }
 
   submit() {
+    console.log(this.form.valid)
     if (this.form.valid) {
       this.#events.saveUserData(this.form.value as User);
       if (!!this.active_job()?.id) {

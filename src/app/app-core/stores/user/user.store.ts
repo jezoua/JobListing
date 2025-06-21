@@ -11,6 +11,7 @@ import { withUserReducer } from './user.reducers';
 //3. Only require username and password on account creation. Other details will come
 //in during application.
 //4. Only allow saving favorites when logged in.
+//5. Autofill application fields when data is available and logged in
 
 
 
@@ -18,7 +19,7 @@ export type UserState = {
   data: User | undefined;
   applied_jobs: string[];
   favouriteIds: string [];
-  user_name: string;
+  username: string;
   password: string;
   isLoggedIn: boolean;
 };
@@ -27,7 +28,7 @@ const initialState: UserState = {
   data: undefined,
   applied_jobs: [],
   favouriteIds: [],
-  user_name: '',
+  username: '',
   password: '',
   isLoggedIn: false,
 };

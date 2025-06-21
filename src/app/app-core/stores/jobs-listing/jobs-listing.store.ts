@@ -11,7 +11,6 @@ export type JobsListingState = {
   numberOfItemsToDisplay: number;
   active_job:JobsListing | undefined;
   filters: string;
-  favouriteIds: string[];
   isLoading: boolean;
 };
 
@@ -22,7 +21,6 @@ const initialState: JobsListingState = {
   numberOfItemsToDisplay: INCREMENT,
   active_job:undefined,
   filters: '',
-  favouriteIds:[],
   isLoading: false,
 };
 

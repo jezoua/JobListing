@@ -11,6 +11,10 @@ import { JobDetails } from '../../molecules/job-details/job-details';
 import { JobsListing as Job } from '../../../app-core/models/jobs-listing.model';
 import { Apply } from '../../organisms/apply/apply';
 import { ApplyModalService } from '../../../app-core/services/applyModal.service';
+import { SignUpModalService } from '../../../app-core/services/signUpModal.service';
+import { Signup } from '../../molecules/signup/signup';
+import { LogInModalService } from '../../../app-core/services/logInModal.service';
+import { LogIn } from '../../molecules/login/login';
 
 @Component({
   selector: 'app-jobs-listing',
@@ -22,11 +26,13 @@ import { ApplyModalService } from '../../../app-core/services/applyModal.service
     Paginator,
     JobDetails,
     CommonModule,
-    Apply
+    Apply,
+    Signup,
+    LogIn
   ],
   templateUrl: './jobs-listing.html',
   styleUrl: './jobs-listing.css',
-  providers: [JobsListingStore, ApplyModalService],
+  providers: [JobsListingStore, ApplyModalService, SignUpModalService, LogInModalService ],
 })
 export class JobsListing {
   #jobsListingStore = inject(JobsListingStore);
@@ -35,6 +41,14 @@ export class JobsListing {
   //inject apply modal service to control apply modal
   private readonly applyModalService = inject(ApplyModalService)
   isApplyModalOpen = this.applyModalService.isOpen
+
+  //inject apply modal service to control apply modal
+  private readonly signupModalService = inject(SignUpModalService)
+  isSignUpModalOpen = this.signupModalService.isOpen
+  //inject apply modal service to control apply modal
+  private readonly logInModalService = inject(LogInModalService)
+  isLogInModalOpen = this.logInModalService.isOpen
+
 
   protected readonly jobs_to_display =
     this.#jobsListingStore.jobsListing_display;

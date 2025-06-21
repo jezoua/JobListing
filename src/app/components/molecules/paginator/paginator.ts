@@ -20,16 +20,19 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 export class Paginator {
   readonly #jobsListingStore = inject(JobsListingStore);
 
+  //this of getting the number of pages to display to the paginator
   number_of_pages = this.#jobsListingStore.number_of_pages;
   active_page = signal(1);
+
+  //this is for generation of pagination buttons
   pages = computed(() => {
     const totalPages = this.number_of_pages();
     const currentPage = this.active_page();
 
     const page_array: number[] = [];
 
+    // Show all pages if total pages are 6 or fewer
     if (totalPages <= 6) {
-      // Show all pages if total pages are 6 or fewer
       for (let i = 1; i <= totalPages; i++) {
         page_array.push(i);
       }
@@ -68,8 +71,6 @@ export class Paginator {
   });
 
   setActivePage(page: number) {
-    console.log(`🦊setting page to ${page}`);
-
     this.active_page.set(page);
   }
 
@@ -80,6 +81,8 @@ export class Paginator {
     this.setActivePage(this.active_page() - 1);
   }
 
+  //pages are appended so user can conveniently navigate to pages via scrolling
+  //while having the ability to use a paginator
   #pageChangeEffect = effect(() => {
     const el = document.getElementById(`page-${this.active_page()}`);
     if (el) {
@@ -89,9 +92,11 @@ export class Paginator {
 
   scrollTriggers: ScrollTrigger[] = [];
 
+  //this is to change the active page one user scrolls to a different page
   #showMoreEffect = effect(() => {
     if (!this.#jobsListingStore.isLoading()) {
       untracked(() => {
+        //clear out all previous scrolltriggers
         setTimeout(() => {
           this.scrollTriggers.forEach((trigger) => trigger.kill());
 
@@ -108,6 +113,7 @@ export class Paginator {
             this.scrollTriggers.push(trigger);
           }
         }, 2000);
+        //the delay is for the timing issue with dom render and scrollTrigger mapping
 
         ScrollTrigger.refresh();
       });
@@ -121,7 +127,6 @@ export class Paginator {
 
   ngAfterViewInit(): void {
     gsap.registerPlugin(ScrollTrigger);
-    console.log('🚀');
   }
   ngOnDestroy() {
     this.scrollTriggers.forEach((trigger) => trigger.kill());

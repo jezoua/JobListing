@@ -6,9 +6,25 @@
         formControlName="filter" type="search" />
     </form>
   </div>
+  @if(!is_logged_in()){
   <div class="flex flex-row gap-2">
-    <button type="button" class="hover:shadow-lg cursor-pointer text-sm text-jg-red border border-jg-red rounded-md px-2">Log in</button>
-    <button type="button" class="hover:shadow-lg cursor-pointer bg-jg-red text-white px-2 rounded-md text-sm">Sign up</button>
-
+    <button type="button"
+      (click)="openLogIn()"
+      class="hover:shadow-lg cursor-pointer text-sm text-jg-red border border-jg-red rounded-md px-2">
+      Log in
+    </button>
+    <button type="button"
+      (click)="openSignUp()"
+      class="hover:shadow-lg cursor-pointer bg-jg-red text-white px-2 rounded-md text-sm">
+      Sign up
+    </button>
   </div>
+  }
+  @else{
+    <button type="button"
+    (click)="logOut()"
+      class="hover:shadow-lg cursor-pointer text-sm text-jg-red border border-jg-red rounded-md px-2">
+      Log Out
+    </button>
+  }
 </div>

@@ -1,16 +1,17 @@
 <div class="fixed inset-0 z-50 bg-black/20 backdrop-blur-sm flex items-center justify-center">
   <div class="h-fit bg-white flex flex-col gap-4 rounded-lg shadow-lg p-6 w-100 max-w-xl relative">
-    <button (click)="closeSignUp()" class="absolute top-2 right-4 text-jg-red cursor-pointer hover:text-black text-xl">
+    <button (click)="closeLogIn()" class="absolute top-2 right-4 text-jg-red cursor-pointer hover:text-black text-xl">
       ×
     </button>
     <div class="flex flex-col">
-      <h2 class="text-2xl font-roboto text-jg-red">Sign Up</h2>
+      <h2 class="text-2xl font-roboto text-jg-red">Log In</h2>
     </div>
 
     <form [formGroup]="form" (ngSubmit)="submit()" class="space-y-4 overflow-y-scroll h-full">
       <div class="flex flex-col gap-2">
         <div class="relative w-full">
-          <input id="username" formControlName="username" placeholder="" [ngClass]="{'border-red-500': hasError('username', 'required')}"
+          <input id="username" formControlName="username" placeholder=""
+            [ngClass]="{'border-red-500': hasError('username', 'required')}"
             class="peer block w-full appearance-none border border-gray-300 bg-white px-3 pt-5 text-md text-gray-900 rounded-md focus:border-jg-orange focus:outline-none" />
           <label for="username"
             class="absolute left-3 top-2 text-gray-500 text-xs transition-all duration-200 peer-placeholder-shown:top-3 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-focus:top-1 peer-focus:text-xs peer-focus:text-jg-orange">
@@ -26,21 +27,13 @@
             Password
           </label>
         </div>
-        <div class="relative w-full">
-          <input id="confirm_password" type="password" formControlName="confirm_password" placeholder=""
-            [ngClass]="{'border-red-500': hasError('confirm_password', 'required')}"
-            class="peer block w-full appearance-none border border-gray-300 bg-white px-3 pt-5 text-md text-gray-900 rounded-md focus:border-jg-orange focus:outline-none" />
-          <label for="confirm_password"
-            class="absolute left-3 top-2 text-gray-500 text-xs transition-all duration-200 peer-placeholder-shown:top-3 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-focus:top-1 peer-focus:text-xs peer-focus:text-jg-orange">
-            Confirm Password
-          </label>
-          @if(!passwordMatch()){
-          <span class="px-3 text-sm text-red-500">Password doesn't match.</span>
-          }
-        </div>
+        @if(wrong_creds()){
+        <span class="px-3 text-sm text-red-500">Invalid Log In details.</span>
+        }
         <button type="submit"
+          [ngClass]="{'border-red-500':wrong_creds()}"
           class="w-fit self-center m-4 bg-white cursor-pointer hover:bg-jg-orange hover:text-white border border-jg-orange text-jg-orange py-2 px-4 rounded-md disabled:opacity-50">
-          Sign Up
+          Log In
         </button>
       </div>
     </form>
