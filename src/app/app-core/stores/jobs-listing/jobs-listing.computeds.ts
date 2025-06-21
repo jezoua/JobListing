@@ -41,6 +41,9 @@ export function withJobsListingComputeds() {
         isLoading: computed(() => {
           return state.isLoading();
         }),
+        favourites: computed(() => {
+        return state.favouriteIds();
+        })
       };
     }),
     withComputed(({jobsListing_display}) => {

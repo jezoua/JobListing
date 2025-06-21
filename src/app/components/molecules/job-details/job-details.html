@@ -1,0 +1,37 @@
+<div class="flex flex-col gap-4 p-4 border border-gray-200 bg-white h-full w-auto rounded-lg">
+  <div class="flex flex-col">
+    <div class="flex flex-row justify-between items-center gap-3">
+      <h3 class="text-3xl">{{active_job()?.title}}</h3>
+      <div class="flex flex-row items-center justify-center gap-2">
+        @if(active_job() && favourites().includes(active_job()!.id)) {
+        <button (click)="removeFavourite(active_job()?.id)" class="flex items-center justify-center transition-all duration-200 hover:scale-110 cursor-pointer"
+          aria-label="remove from favorites">
+          <span class="material-icons text-jg-red">favorite</span>
+        </button>
+        } @else {
+        <button (click)="addFavourite(active_job()?.id)" class="flex items-center justify-center transition-all duration-200 hover:scale-110 cursor-pointer"
+          aria-label="Add to favorites">
+          <span class="material-icons text-jg-red w-6">favorite_outlined</span>
+        </button>
+        }
+
+        <button class="bg-jg-red text-white rounded-full px-4 py-1 shadow-lg cursor-pointer">
+          Apply
+        </button>
+      </div>
+    </div>
+    <div class="">
+      <span class="font-roboto">{{active_job()?.page?.alias}} | </span>
+      <span class="font-light text-sm">{{active_job()?.page?.location?.country_and_city}}</span>
+    </div>
+    <span class="font-light text-md text-gray-500">({{active_job()?.type}})</span>
+    <span class="text-xs font-light text-cyan-400">Posted {{(active_job()?.date_published || '') | relativeTime}}</span>
+  </div>
+  <div class="flex flex-col gap-1 font-light text-sm">
+    <span>Vacancy: {{active_job()?.number_of_vacancies}}</span>
+    <span>Minimum Years of Experience:
+      {{active_job()?.minimum_years_of_experience}}</span>
+  </div>
+  <img [ngSrc]="active_job()?.cover || ''" width="600" height="400" class="py-1"
+    [alt]="active_job()?.page?.alias + ' logo'" />
+</div>

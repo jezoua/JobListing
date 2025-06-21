@@ -1,8 +1,9 @@
 /* You can add global styles to this file, and also import other style files */
 @import "tailwindcss";
+/*@import "material-icons/iconfont/material-icons.css";*/
 
 @theme {
-  --color-jg-red: #7F110F;
+  --color-jg-red: #7f110f;
   --color-jg-background: #faf7f4;
   --color-jg-orange: #db9700;
 

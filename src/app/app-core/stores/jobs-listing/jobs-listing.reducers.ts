@@ -2,6 +2,7 @@ import { signalStoreFeature, type } from '@ngrx/signals';
 import { on, withReducer } from '@ngrx/signals/events';
 import { JobsListingEvents } from './jobs-listing.events';
 import { JobsListingState } from './jobs-listing.store';
+import { JobsListing } from '../../../components/pages/jobs-listing/jobs-listing';
 
 export function withJobsListingReducer<_>() {
   return signalStoreFeature(
@@ -14,31 +15,41 @@ export function withJobsListingReducer<_>() {
       on(JobsListingEvents.load, (event) => {
         return { isLoading: true };
       }),
-      on(JobsListingEvents.filter, ({payload:filter}) => {
+      on(JobsListingEvents.filter, ({ payload: filter }) => {
         return { filters: filter };
       }),
-      //on(JobsListingEvents.addFavourite, ({ payload: favouriteId }) => (state) => {
-      //  if (state.favouriteIds.includes(favouriteId)) {
-      //    return {};
-      //  }
-      //  return {
-      //    favouriteIds: [...state.favouriteIds, favouriteId],
-      //  };
-      //}),
-      //on(
-      //  JobsListingEvents.removeFavourite,
-      //  ({ payload: favouriteId }) =>
-      //    (state) => {
-      //      if (!state.favouriteIds.includes(favouriteId)) {
-      //        return {};
-      //      }
-      //      return {
-      //        favouriteIds: state.favouriteIds.filter(
-      //          (id) => favouriteId !== id,
-      //        ),
-      //      };
-      //    },
-      //),
+      on(JobsListingEvents.setActiveJob, ({ payload: job }) => {
+        return { active_job: job };
+      }),
+      on(
+        JobsListingEvents.addFavourite,
+        ({ payload: favouriteId }) =>
+          (state) => {
+            console.log('ADDING to favourites...')
+            if (!favouriteId) return {};
+            if (state.favouriteIds.includes(favouriteId)) {
+              return {};
+            }
+            return {
+              favouriteIds: [...state.favouriteIds, favouriteId],
+            };
+          },
+      ),
+      on(
+        JobsListingEvents.removeFavourite,
+        ({ payload: favouriteId }) =>
+          (state) => {
+            if (!favouriteId) return {};
+            if (!state.favouriteIds.includes(favouriteId)) {
+              return {};
+            }
+            return {
+              favouriteIds: state.favouriteIds.filter(
+                (id) => favouriteId !== id,
+              ),
+            };
+          },
+      ),
       //on(JobsListingEvents.resetFavourites, customerChanged, () => ({
       //  favouriteIds: [],
       //})),

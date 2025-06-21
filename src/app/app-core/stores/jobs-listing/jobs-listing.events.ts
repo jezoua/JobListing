@@ -9,5 +9,8 @@ export const JobsListingEvents = eventGroup({
     load: type<void>(),
     loaded: type<PHPResourceResponse<JobsListing>>(),
     filter: type<string>(),
+    setActiveJob:type<JobsListing | undefined>(),
+    addFavourite:type<string | undefined>(),
+    removeFavourite:type<string | undefined>(),
   },
 });

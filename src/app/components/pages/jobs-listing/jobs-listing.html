@@ -1,32 +1,41 @@
-<div class="flex flex-col items-center justify-center gap-4 h-screen">
+<div class="flex flex-col items-center justify-center gap-4 h-screen px-20">
   <app-nav-bar />
-  <div class="flex flex-col border border-gray-200 bg-white w-fit min-w-100 h-9/10 rounded-lg mb-4">
-    <div class="p-4 flex flex-row justify-between items-center">
-      <h2 class="text-xl font-roboto">Jobs</h2>
-      <app-paginator />
+  <div class="flex flex-row h-9/10 gap-4 w-full justify-center">
+    <div class="flex flex-col border border-gray-200 bg-white w-130 rounded-lg">
+      <div class="p-4 flex flex-row justify-between items-center">
+        <h2 class="text-xl font-roboto">Jobs</h2>
+        <app-paginator />
+      </div>
+      <ul class="jobslist flex flex-col overflow-y-scroll">
+        @for (job of jobs_to_display(); track job?.id){
+        <li (click)="setActiveJob(job)" [id]="$index % 10 === 0 ? 'page-' + ($index / 10 + 1) : null"
+          class="flex flex-row items-start gap-4 ltr:pl-4 rtl:pr-4 h-full cursor-pointer hover:scale-105 hover:shadow-lg transition-transform"
+          [ngClass]="{'border-r-6 border-jg-red ': job?.id === active_job()?.id}">
+          <img [ngSrc]="job?.cover || 'logo_red.png'" width="75" height="75" class="py-1"
+            [alt]="job?.page?.alias + ' logo'" />
+          <div class="flex flex-col border-b-1 border-gray-200 w-full pb-2 pr-4">
+            <h4 class="flex flex-col text-lg font-roboto text-pretty"
+              [ngClass]="{'text-jg-red ': job?.id === active_job()?.id}">
+              {{job?.title || ''}}
+            </h4>
+            <span class="text-md" [ngClass]="{'text-jg-red ': job?.id === active_job()?.id}">
+              {{job?.page?.alias}}</span>
+            <span class="font-light text-sm">{{job?.page?.location?.country_and_city}}</span>
+            <span class="text-xs font-light text-gray-400">{{(job?.date_published || '') | relativeTime}}</span>
+          </div>
+        </li>
+        } @if(is_loading()){
+        <app-loading-spinner />
+        } @else {
+        <button type="" (click)="loadMore()"
+          class="active:scale-95 cursor-pointer m-4 border-1 shadow-md border-jg-orange text-jg-orange w-fit self-center p-2 rounded-md">
+          Load More
+        </button>
+        }
+      </ul>
     </div>
-    <ul class="jobslist flex flex-col gap-2 overflow-y-scroll">
-      @for (job of jobs_to_display(); track job?.id){
-      <li [id]="$index % 10 === 0 ? 'page-' + ($index / 10 + 1) : null"
-        class="flex flex-row items-start gap-4 ltr:pl-4 rtl:pr-4 h-full">
-        <img [ngSrc]="job?.cover || 'logo_red.png'" width="75" height="75" class="py-1" [alt]="job?.page?.alias + ' logo'" />
-        <div class="flex flex-col border-b-1 border-gray-200 w-full pb-2 pr-4">
-          <h4 class="flex flex-col text-lg font-roboto text-pretty">
-            {{job?.title || ''}}
-          </h4>
-          <span class="text-md">{{job?.page?.alias}}</span>
-          <span class="font-light text-sm">{{job?.page?.location?.country_and_city}}</span>
-          <span class="text-xs font-light text-gray-400">{{(job?.date_published || '') | relativeTime}}</span>
-        </div>
-      </li>
-      } @if(is_loading()){
-      <app-loading-spinner />
-      } @else {
-      <button type="" (click)="loadMore()"
-        class="active:scale-95 cursor-pointer m-4 border-1 shadow-md border-jg-orange text-jg-orange w-fit self-center p-2 rounded-md">
-        Load More
-      </button>
-      }
-    </ul>
+    @if(!!active_job()){
+    <app-job-details class="w-full" />
+    }
   </div>
 </div>
